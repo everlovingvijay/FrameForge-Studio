@@ -1,0 +1,6 @@
+{
+  "name": "FrameForge Studio",
+  "description": "Offline-first professional desktop video editor combining one-touch automatic video editing with manual multi-track timeline precision.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,2 @@
+# Place target-tripled ffmpeg and ffprobe sidecar binaries here before building Tauri.
+# See docs/TAURI_INTEGRATION.md for exact filenames.

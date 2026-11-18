@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://frameforge.local/schemas/frameforge-project.schema.json",
+  "title": "FrameForgeProjectDocument",
+  "description": "Shared offline-first portable .ffproj manifest schema shared between React/TypeScript frontend and Rust serde backend.",
+  "type": "object",
+  "required": [
+    "metadata",
+    "sequence",
+    "mediaIndex",
+    "timeline",
+    "enhancements",
+    "audio",
+    "autoStudio",
+    "renderHistory"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["id", "name", "schemaVersion", "createdAtIso", "updatedAtIso", "filePath", "lastWorkspace"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "schemaVersion": { "type": "string", "const": "1.0.0" },
+        "createdAtIso": { "type": "string" },
+        "updatedAtIso": { "type": "string" },
+        "filePath": { "type": "string" },
+        "lastWorkspace": { "enum": ["auto-studio", "pro-editor"] }
+      }
+    },
+    "sequence": {
+      "type": "object",
+      "required": ["width", "height", "fps", "colorSpace", "workingBitDepth"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 128 },
+        "height": { "type": "integer", "minimum": 128 },
+        "fps": { "type": "number", "minimum": 1 },
+        "colorSpace": { "enum": ["Rec.709", "Rec.2020 HLG", "sRGB", "Apple Log"] },
+        "workingBitDepth": { "enum": [8, 10, 32] }
+      }
+    },
+    "mediaIndex": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "relativePath", "absolutePath", "kind", "durationSeconds", "width", "height", "fps", "codec", "fileSizeBytes", "hasAudio"]
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "required": ["tracks", "clips", "markers", "snapSettings", "playheadSec", "zoom"],
+      "properties": {
+        "tracks": { "type": "array" },
+        "clips": { "type": "array" },
+        "markers": { "type": "array" },
+        "snapSettings": { "type": "object" },
+        "playheadSec": { "type": "number", "minimum": 0 },
+        "zoom": { "type": "number", "minimum": 1 }
+      }
+    },
+    "enhancements": { "type": "object" },
+    "audio": { "type": "object" },
+    "autoStudio": { "type": "object" },
+    "renderHistory": { "type": "array" }
+  }
+}

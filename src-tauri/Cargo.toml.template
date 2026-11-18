@@ -1,0 +1,36 @@
+# Rename to `Cargo.toml` when initializing Tauri 2 desktop runtime (`npx @tauri-apps/cli init`).
+[package]
+name = "frameforge-studio"
+version = "0.1.0"
+description = "Offline-first commercial-grade desktop video editor powered by FFmpeg, FFprobe, OpenCV, and SQLite."
+authors = ["FrameForge Studio"]
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["protocol-asset"] }
+tauri-plugin-shell = "2"
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["process", "sync", "rt-multi-thread"] }
+rusqlite = { version = "0.32", features = ["bundled"] }
+thiserror = "2"
+
+[features]
+default = []
+# Enable OpenCV optical flow / scene scoring / bilateral denoise when native OpenCV SDK is installed
+opencv-engine = ["dep:opencv"]
+# Enable optional offline ONNX Runtime inference (face segmentation / subject tracking)
+onnx-local = ["dep:ort"]
+
+[dependencies.opencv]
+version = "0.93"
+optional = true
+
+[dependencies.ort]
+version = "2.0.0-rc.9"
+optional = true

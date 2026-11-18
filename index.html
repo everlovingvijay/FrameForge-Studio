@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FrameForge Studio — Offline-First Video Editor</title>
+    <meta name="description" content="Offline-first professional desktop video editor combining one-touch automatic video editing with manual multi-track timeline precision." />
+    <meta property="og:title" content="FrameForge Studio" />
+    <meta property="og:description" content="Offline-first professional desktop video editor combining one-touch automatic video editing with manual multi-track timeline precision." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      (function () {
+        try {
+          var ownDesc = Object.getOwnPropertyDescriptor(window, 'fetch');
+          if (!ownDesc || (ownDesc.get && !ownDesc.set && ownDesc.configurable)) {
+            var proto = Object.getPrototypeOf(window);
+            var origGet = ownDesc && ownDesc.get;
+            var origVal = origGet ? null : window.fetch;
+            var overridden = false;
+            var overrideValue;
+            Object.defineProperty(window, 'fetch', {
+              configurable: true,
+              enumerable: true,
+              get: function () {
+                if (overridden) return overrideValue;
+                if (origGet) return origGet.call(window);
+                return proto ? Reflect.get(proto, 'fetch', window) : origVal;
+              },
+              set: function (nextFetch) {
+                overridden = true;
+                overrideValue = nextFetch;
+              },
+            });
+          }
+        } catch (_err) {
+          // Ignore non-configurable host descriptors
+        }
+
+        window.addEventListener(
+          'error',
+          function (event) {
+            if (
+              event &&
+              typeof event.filename === 'string' &&
+              event.filename.indexOf('chrome-extension://') === 0
+            ) {
+              event.preventDefault();
+              event.stopImmediatePropagation();
+            }
+          },
+          true
+        );
+      })();
+    </script>
+  </head>
+  <body class="bg-[#111215] text-[#E6E8EC] antialiased selection:bg-[#3B82F6]/30 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

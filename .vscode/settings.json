@@ -1,0 +1,16 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.formatOnSave": false,
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.ffproj": "json"
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/src-tauri/target": true
+  },
+  "rust-analyzer.linkedProjects": [
+    "src-tauri/Cargo.toml"
+  ]
+}
